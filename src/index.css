@@ -1,0 +1,243 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+  /* --- PALETA DE CORES OLIVA & BEGE --- */
+  --cor-fundo-geral: #fcfbfa;       /* Off-white levemente quente */
+  --cor-fundo-card: #f4f3ee;        /* Fundo oliva bem claro, quase bege */
+  --cor-oliva-claro: #a3b19b;       /* Verde oliva claro institucional */
+  --cor-oliva-principal: #708238;   /* Verde oliva para botões e destaques */
+  --cor-oliva-escuro: #4b5825;      /* Tom mais escuro para hover e títulos */
+  --cor-texto-principal: #2f3e22;   /* Texto escuro com pigmento oliva */
+  --cor-texto-suave: #6b7761;       /* Texto secundário */
+  --cor-borda: #dcdad2;             /* Borda suave acinzentada/bege */
+  
+  --cor-erro: #b91c1c;
+  --cor-sucesso: #15803d;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--cor-fundo-geral);
+  color: var(--cor-texto-principal);
+}
+
+#root {
+  width: 100%;
+}
+
+/* --- ESTILOS DE COR DOS COMPONENTES DE AUTENTICAÇÃO --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--cor-fundo-geral);
+}
+
+.auth-card {
+  background: var(--cor-fundo-card);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--cor-borda);
+  box-shadow: 0 4px 12px rgba(112, 130, 56, 0.05);
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-card h2 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--cor-oliva-escuro);
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cor-texto-principal);
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: var(--cor-texto-principal);
+  transition: all 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--cor-oliva-claro);
+  box-shadow: 0 0 0 3px rgba(163, 177, 155, 0.3);
+}
+
+.btn-primary {
+  background-color: var(--cor-oliva-principal);
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--cor-oliva-escuro);
+}
+
+.btn-primary:disabled {
+  background-color: var(--cor-oliva-claro);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.auth-toggle a {
+  color: var(--cor-oliva-principal);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.auth-toggle a:hover {
+  text-decoration: underline;
+  color: var(--cor-oliva-escuro);
+}
+
+.message {
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* --- AJUSTES DO BOX DE LOGIN --- */
+.auth-card {
+  background: var(--cor-fundo-card);
+  padding: 3rem 2.5rem 2.5rem 2.5rem; /* Mais espaçamento no topo para a logo */
+  border-radius: 20px; /* Cantos bem arredondados e modernos */
+  border: 1px solid var(--cor-borda);
+  box-shadow: 0 10px 25px -5px rgba(112, 130, 56, 0.08); /* Sombra suave oliva */
+  width: 100%;
+  max-width: 400px;
+}
+
+/* --- CONTAINER DA LOGO --- */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem; /* Espaço entre a logo e o título */
+  width: 100%;
+}
+
+.logo-app {
+  max-width: 140px; /* Tamanho limite ideal para a logo no box */
+  height: auto;
+  object-fit: contain;
+}
+/* --- CONTAINER E CARDS DOS GRÁFICOS --- */
+.dashboard-grid-graficos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card-grafico {
+  background-color: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-grafico h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--cor-texto-principal);
+  font-weight: 700;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 0.5rem;
+}
+
+.area-grafico {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Customização das Legendas */
+.custom-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.legend-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legend-value {
+  font-weight: 700;
+  color: var(--cor-texto-principal);
+}
+.message.success { background-color: #f0f4ee; color: var(--cor-sucesso); border: 1px solid #d2e2cc; }
+.message.error { background-color: #fdf2f2; color: var(--cor-erro); border: 1px solid #f8d7da; }

@@ -170,10 +170,8 @@ export default function Produtos() {
   };
 
   const handleInputChange = (field: keyof Product, value: any) => {
-    // Atualiza os dados principais do produto
     setFormData(prev => ({ ...prev, [field]: value }));
 
-    // Se o campo alterado for o SKU Geral, replica automaticamente para todos os canais
     if (field === 'sku') {
       setValoresMkt(prevMkt => {
         const novosValores = { ...prevMkt };
@@ -375,6 +373,11 @@ export default function Produtos() {
                 {abaMktAtiva && valoresMkt[abaMktAtiva] && (() => {
                   const item = valoresMkt[abaMktAtiva];
                   const margemFinal = item.net_receivable - (Number(item.supplier_cost) || 0);
+                  
+                  // Cálculo do ROAS Mínimo (Evita divisão por zero ou margem negativa gerando erro na tela)
+                  const roasMinimo = margemFinal > 0 
+                    ? (item.final_sale_value / margemFinal).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+                    : '0,00';
 
                   return (
                     <div style={{ backgroundColor: '#fcfdfa', padding: '0.5rem', borderRadius: '4px', maxWidth: '550px', margin: '0 auto', border: '1px solid #e2e8f0' }}>
@@ -471,6 +474,10 @@ export default function Produtos() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <span style={{ fontSize: '0.85rem', color: '#2b6cb0', fontWeight: 'bold' }}>Margem Final:</span>
                           <strong style={{ fontSize: '0.95rem', color: '#2b6cb0' }}>{formatarMoeda(margemFinal)}</strong>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#2b6cb0', fontWeight: 'bold' }}>ROAS Mínimo:</span>
+                          <strong style={{ fontSize: '0.95rem', color: '#2b6cb0' }}>{roasMinimo}</strong>
                         </div>
                       </div>
                     </div>

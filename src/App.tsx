@@ -6,15 +6,15 @@ import { supabase } from "./supabaseClient.ts";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
 import Produtos from "./pages/Produtos.tsx";
-import Marketplaces from "./pages/Marketplaces"; // Nova página integrada
-import PainelLayout from "./components/PainelLayout.tsx"; // Aponta para o seu arquivo corrigido
+import Pedidos from "./pages/Pedidos.tsx";
+import Marketplaces from "./pages/Marketplaces"; 
+import CategoriasFinanceiras from "./pages/CategoriasFinanceiras"; // Nova tela
+import ContasCorrentes from "./pages/ContasCorrentes";         // Nova tela
+import PainelLayout from "./components/PainelLayout.tsx"; 
 
-// Placeholders para as próximas telas do sistema
+// Placeholders mantidos
 function Dashboard() {
   return <div style={{ padding: '1rem', backgroundColor: '#fff', borderRadius: '8px', fontFamily: 'sans-serif' }}>Conteúdo do Dashboard Geral e Métricas.</div>;
-}
-function Pedidos() {
-  return <div style={{ padding: '1rem', backgroundColor: '#fff', borderRadius: '8px', fontFamily: 'sans-serif' }}>Gerenciamento de Pedidos e Vendas.</div>;
 }
 function Baixas() {
   return <div style={{ padding: '1rem', backgroundColor: '#fff', borderRadius: '8px', fontFamily: 'sans-serif' }}>Controle de Baixas e Faturamento.</div>;
@@ -29,13 +29,11 @@ export default function App() {
   const [telaAtual, setTelaAtual] = useState('home');
 
   useEffect(() => {
-    // Detecta a sessão ativa do usuário atual ao carregar o app
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setCarregando(false);
     });
 
-    // Escuta mudanças em tempo real (Login / Logout / Token Expirado)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
@@ -51,27 +49,27 @@ export default function App() {
     );
   }
 
-  // Define o título exibido no cabeçalho do layout conforme a tela ativa
+  // Define o título exibido no cabeçalho conforme a tela ativa
   const obterTituloPagina = () => {
     switch (telaAtual) {
       case 'home': return 'Dashboard Central';
       case 'produtos': return 'Gerenciamento de Produtos';
       case 'marketplaces': return 'Canais de Venda & Marketplaces';
       case 'pedidos': return 'Painel de Pedidos';
+      case 'categorias': return 'Categorias Financeiras';
+      case 'contas': return 'Contas Correntes';
       case 'baixa': return 'Baixas / Faturamento';
       case 'perfil': return 'Meus Dados';
-      default: return 'Super Pedidos Marktplaces';
+      default: return 'Super Pedidos';
     }
   };
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rotas Públicas */}
         <Route path="/login" element={!session ? <Login /> : <Navigate to="/" />} />
         <Route path="/cadastro" element={!session ? <Register /> : <Navigate to="/" />} />
 
-        {/* Rotas Privadas (Protegidas por Autenticação) */}
         <Route
           path="/"
           element={
@@ -82,11 +80,12 @@ export default function App() {
                 setTelaAtual={setTelaAtual}
                 session={session}
               >
-                {/* Injeção dinâmica do conteúdo no {children} do Layout */}
                 {telaAtual === 'home' && <Dashboard />}
                 {telaAtual === 'produtos' && <Produtos />}
                 {telaAtual === 'marketplaces' && <Marketplaces />}
                 {telaAtual === 'pedidos' && <Pedidos />}
+                {telaAtual === 'categorias' && <CategoriasFinanceiras />}
+                {telaAtual === 'contas' && <ContasCorrentes />}
                 {telaAtual === 'baixa' && <Baixas />}
                 {telaAtual === 'perfil' && <Perfil />}
               </PainelLayout>
@@ -96,7 +95,6 @@ export default function App() {
           }
         />
 
-        {/* Rota de segurança caso digitem um caminho inválido */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

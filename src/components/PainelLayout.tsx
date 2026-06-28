@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient.ts';
-// Corrigido aqui: comentário removido para evitar qualquer erro de sintaxe
-import { Menu, X, Home, ShoppingBag, ClipboardList, Receipt, User, LogOut, Store } from 'lucide-react';
+import { Menu, X, Home, ShoppingBag, ClipboardList, Receipt, User, LogOut, Store, Tags, Wallet } from 'lucide-react';
 
 interface PainelLayoutProps {
   children: React.ReactNode;
@@ -38,9 +37,11 @@ export default function PainelLayout({ children, tituloPagina, telaAtual, setTel
 
   const itensMenu = [
     { id: 'home', label: 'Dashboard', icon: <Home size={20} /> },
+    { id: 'pedidos', label: 'Pedidos', icon: <ClipboardList size={20} /> },
     { id: 'produtos', label: 'Produtos', icon: <ShoppingBag size={20} /> },
     { id: 'marketplaces', label: 'Marketplaces', icon: <Store size={20} /> },
-    { id: 'pedidos', label: 'Pedidos', icon: <ClipboardList size={20} /> },
+    { id: 'categorias', label: 'Categorias Fin.', icon: <Tags size={20} /> },
+    { id: 'contas', label: 'Contas Correntes', icon: <Wallet size={20} /> },
     { id: 'baixa', label: 'Baixas / Faturamento', icon: <Receipt size={20} /> },
     { id: 'perfil', label: 'Meus Dados', icon: <User size={20} /> },
   ];
@@ -77,7 +78,7 @@ export default function PainelLayout({ children, tituloPagina, telaAtual, setTel
           >
             {menuAberto ? <X size={24} /> : <Menu size={24} />}
           </button>
-          <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold' }}>Super Pedidos Marktplaces</h1>
+          <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold' }}>Super Pedidos</h1>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -158,7 +159,6 @@ export default function PainelLayout({ children, tituloPagina, telaAtual, setTel
 
           {children}
         </main>
-
       </div>
     </div>
   );
